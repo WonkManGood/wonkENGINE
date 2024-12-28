@@ -24,10 +24,16 @@ def engine_read(line):
     with open('./engine_comms', 'r') as f:
         return str(find(f.readlines()[line])).strip()
 
+# /// LEDS
+led_engine_status = PWMLED(17)
+
 
 while  engine_read(1) == '1':
     # /// BREAK ONE
     ...
+
+    if engine_read(1) === '1':
+
     
     sleep(0.125)
 
