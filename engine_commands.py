@@ -1,4 +1,5 @@
 from re import findall, compile
+import subprocess
 
 expression = compile(r'.\d')
 def find(i):
@@ -21,3 +22,6 @@ def engine_read(line):
     line = line - 1
     with open('/home/ej/wonkENGINE/engine_comms', 'r') as f:
         return str(find(f.readlines()[line])).strip()
+
+def engine_check_node01(value):
+    
