@@ -1,64 +1,55 @@
 from time import sleep
 from gpiozero import PWMLED
-from re import findall, compile
-
-expression = compile(r'.\d')
-def find(i):
-    return (findall(expression, i))[0]
-
-def engine_write(line, value):
-    try:
-        line = int(line)
-        value = str(value)
-    except: return _
-
-    with open('./engine_comms', 'r') as f:
-        lines = f.readlines()
-        lines[line] = ''
-        lines[line] = str('{ '+value+' }\n')
-        with open('./engine_comms', 'w') as f:
-            f.writelines(lines)
-
-def engine_read(line):
-    line = line - 1
-    with open('./engine_comms', 'r') as f:
-        return str(find(f.readlines()[line])).strip()
+from engine_commands import engine_read, engine_write
 
 # /// LEDS
 led_engine_status = PWMLED(17)
+led_ssh_status = PWMLED(24)
 
 
 while  engine_read(1) == '1':
     # /// BREAK ONE
     ...
 
-    if engine_read(1) === '1':
-
+    if engine_read(1) == '1':
+        led_engine_status.value = 0.15
     
     sleep(0.125)
 
     # /// BREAK TWO
     ...
     
+    led_engine_status.value = 0
+
     sleep(0.125)
 
     # /// BREAK THREE
     ...
-    
+
+    if str(engine_read(2)) == '1': led_ssh_status.value = 0.2
+    else: led_ssh_status.off()   
+
     sleep(0.125)
 
     # /// BREAK FOUR
     ...
-    
+
+    led_ssh_status.off()
+
     sleep(0.125)
 
     # /// BREAK FIVE
     ...
+
+    if str(engine_read(2)) == '1': led_ssh_status.value = 0.2
+    else: led_ssh_status.off()  
     
     sleep(0.125)
 
     # /// BREAK SIX
     ...
+
+    led_ssh_status.off()
     
     sleep(0.125)
 
