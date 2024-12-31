@@ -24,4 +24,8 @@ def engine_read(line):
         return str(find(f.readlines()[line])).strip()
 
 def engine_check_node01(value):
-    
+    command = ['ping', '-c', '1' , '192.168.0.11']
+    ran = subprocess.run(command, capture_output=True)
+    print(ran.stdout)
+    print(ran.stderr)
+engine_check_node01(1)
