@@ -1,6 +1,6 @@
 from time import sleep
 from gpiozero import PWMLED
-from engine_commands import engine_read, engine_write
+from commands.engine_commands import engine_read, engine_write
 
 # /// LEDS
 led_engine_status = PWMLED(17)

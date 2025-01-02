@@ -28,4 +28,3 @@ def engine_check_node01(value):
     ran = subprocess.run(command, capture_output=True)
     print(ran.stdout)
     print(ran.stderr)
-engine_check_node01(1)
