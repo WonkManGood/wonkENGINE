@@ -24,3 +24,18 @@ def engine_check_node01(value):
     ran = subprocess.run(command, capture_output=True)
     print(ran.stdout)
     print(ran.stderr)
+
+def engine_roundtrip_check(line):
+    with open('/home/ej/wonkENGINE/engine_comms', 'r') as f:
+        lines = f.readlines()
+
+        try: value = int(lines[(line - 1)][0])
+        except: return _
+
+        value = value + 1
+
+        engine_write(line, value)
+
+
+
+

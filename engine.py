@@ -1,6 +1,6 @@
 from time import sleep
 from gpiozero import PWMLED
-from commands.engine_commands import engine_read, engine_write
+from commands.engine_commands import engine_read, engine_write, engine_roundtrip_check
 
 # /// LEDS
 led_engine_status = PWMLED(17)
@@ -8,7 +8,7 @@ led_ssh_status = PWMLED(24)
 
 
 while  engine_read(1) == '1':
-    # /// BREAK ONE
+    # /// BREAK ONE ────────────────────────────────────────────────────────────────────
     ...
 
     if engine_read(1) == '1':
@@ -16,14 +16,14 @@ while  engine_read(1) == '1':
     
     sleep(0.125)
 
-    # /// BREAK TWO
+    # /// BREAK TWO ────────────────────────────────────────────────────────────────────
     ...
     
     led_engine_status.value = 0
 
     sleep(0.125)
 
-    # /// BREAK THREE
+    # /// BREAK THREE ───────────────────────────────────────────────────────────────────
     ...
 
     if str(engine_read(2)) == '1': led_ssh_status.value = 0.2
@@ -31,14 +31,14 @@ while  engine_read(1) == '1':
 
     sleep(0.125)
 
-    # /// BREAK FOUR
+    # /// BREAK FOUR ────────────────────────────────────────────────────────────────────
     ...
 
     led_ssh_status.off()
 
     sleep(0.125)
 
-    # /// BREAK FIVE
+    # /// BREAK FIVE ────────────────────────────────────────────────────────────────────
     ...
 
     if str(engine_read(2)) == '1': led_ssh_status.value = 0.2
@@ -46,19 +46,24 @@ while  engine_read(1) == '1':
     
     sleep(0.125)
 
-    # /// BREAK SIX
+    # /// BREAK SIX ─────────────────────────────────────────────────────────────────────
     ...
 
     led_ssh_status.off()
     
     sleep(0.125)
 
-    # /// BREAK SEVEN
+    # /// BREAK SEVEN ────────────────────────────────────────────────────────────────────
     ...
     
     sleep(0.125)
 
-    # /// BREAK EIGHT
+    # /// BREAK EIGHT & FINAL CHECKS FOR ROUND ───────────────────────────────────────────
     ...
+
+    if engine_read(10) == '4': # /// x4
+        print(4)
+    else:
+        engine_roundtrip_check(10)
     
     sleep(0.125)
