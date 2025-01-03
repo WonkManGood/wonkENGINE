@@ -4,8 +4,8 @@ from commands.engine_commands import engine_read, engine_write, engine_roundtrip
 
 # /// LEDS
 led_engine_status = PWMLED(17)
-led_x4 = PWMLED(27)
-led_x8 = PWMLED(22)
+round_x4 = PWMLED(27)
+round_x8 = PWMLED(22)
 led_ssh_status = PWMLED(24)
 
 
@@ -14,8 +14,8 @@ while True:
     ...
 
     # / Off Switch for everything. . .
-    led_x4.value = 0
-    led_x8.value = 0
+    round_x4.value = 0
+    round_x8.value = 0
     
     sleep(0.125)
 
@@ -68,12 +68,12 @@ while True:
         led_engine_status.value = 0.2
 
         if engine_read(10) == '3':
-            led_x4.value = 0.2
+            round_x4.value = 0.2
             engine_write(10, 0)
             engine_roundtrip_check(11)
 
             if engine_read(11) == '3':
-                led_x8.value = 0.2
+                round_x8.value = 0.2
                 engine_write(11, 0)
             
             else: ...
