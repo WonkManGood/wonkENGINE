@@ -4,7 +4,7 @@ def engine_write(line, value):
     try:
         line = int(line) - 1
         value = str(value)
-    except: return _
+    except ValueError: ...
 
     with open('/home/ej/wonkENGINE/engine_comms', 'r') as f:
         lines = f.readlines()
@@ -29,8 +29,9 @@ def engine_roundtrip_check(line):
     with open('/home/ej/wonkENGINE/engine_comms', 'r') as f:
         lines = f.readlines()
 
-        try: value = int(lines[(line - 1)][0])
-        except: return _
+        try:
+            value = int(lines[(line - 1)][0])
+        except ValueError: ...
 
         value = value + 1
 
