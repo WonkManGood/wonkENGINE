@@ -73,7 +73,7 @@ while True:
             engine_roundtrip_check(11)
 
             if engine_read(11) == '3':
-                round_x8.value = 0.2
+                round_x8.value = 0.01
                 engine_write(11, 0)
             
             else: ...
